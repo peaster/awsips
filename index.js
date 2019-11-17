@@ -12,7 +12,7 @@ module.exports = () => {
     }
     const hostsFile = '/etc/hosts';
     fs.exists(hostsFile, function() {
-      console.log("Writing AWS hosts to " + hostsFile + "...");
+      console.log("Writing AWS hosts to " + hostsFile + "...\n");
 
       let outputFile = fs.createWriteStream(hostsFile);
       let jsonOutput = JSON.parse(stdout);
@@ -27,6 +27,7 @@ module.exports = () => {
           console.log(output);
         }
       });
+      console.log("IPs successfully written!")
     });
   });
 }
