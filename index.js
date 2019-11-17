@@ -5,7 +5,7 @@ const sudo = require('sudo-prompt');
 module.exports = () => {
   let awsQuery = "aws ec2 describe-instances --query \"Reservations[*].Instances[*].{PublicIpAddress:PublicIpAddress,Name:Tags[?Key=='Name']|[0].Value}\" --output=json";
 
-  sudo.exec(awsQuery, (error, stdout, stderr) => {
+  sudo.exec(awsQuery, {name: 'AWS Host Update Task'}, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
