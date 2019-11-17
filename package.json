@@ -1,13 +1,14 @@
 {
-  "name": "awsips",
+  "name": "awsips-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+  "bin": {
+    "awsips": "bin/awsips"
   },
+  "scripts": {},
   "author": "p-easterbrooks <p.easterbrooks@gmail.com>",
+  "preferGlobal": true,
   "license": "ISC",
   "dependencies": {
     "exec": "^0.2.1",
