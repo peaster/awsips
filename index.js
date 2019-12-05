@@ -1,18 +1,18 @@
 const { exec } = require("child_process");
 const fs = require('fs');
-const sudo = require('sudo-prompt');
 
 module.exports = () => {
   let awsQuery = "aws ec2 describe-instances --query \"Reservations[*].Instances[*].{PublicIpAddress:PublicIpAddress,Name:Tags[?Key=='Name']|[0].Value}\" --output=json";
 
-  sudo.exec(awsQuery, {name: 'AWS Host Update Task'}, (error, stdout, stderr) => {
+  exec(awsQuery, {name: 'AWS Host Update Task'}, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
     }
     const hostsFile = '/etc/hosts';
+    console.log("Writing AWS hosts to " + hostsFile + "...\n");
+
     fs.exists(hostsFile, function() {
-      console.log("Writing AWS hosts to " + hostsFile + "...\n");
 
       let outputFile = fs.createWriteStream(hostsFile);
       let jsonOutput = JSON.parse(stdout);
